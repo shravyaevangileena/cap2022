@@ -1,0 +1,54 @@
+1. Write a query to display the name, including first_name and last_name and salary for all employees whose salary is out of the range between $10,000 and $15,000.
+    SELECT first_name,last_name,salary from employees WHERE salary BETWEEN(10000 , 15000);
+
+2. Write a query to display the name, including first_name and last_name, and department ID who works in the department 30 or 100 and arrange the result in ascending order according to the department ID.
+      SELECT first_name, last_name, department_id FROM employees WHERE department_id IN (30, 100) ORDER BY  department_id  ASC;
+
+3. Write a query to get the first name of the employee who holds the letter 'c' and 'e' in the first name.
+     select first_name from employees WHERE first_name::text LIKE '%c%' and first_name::text like '%e%';
+
+4. Write a query to display the last name of employees having 'e' as the third character.
+     select last_name from employees WHERE last_name::text LIKE '__e%';
+
+5. Write a query to select all information of employees whose last name is either 'JONES' or 'BLAKE' or 'SCOTT' or 'KING' or 'FORD'.
+       SELECT * FROM employees WHERE last_name IN('jones','blake','scott','king','ford');
+
+6. Write a query to find the number of jobs available in the employees table.
+       select count(job_id) from employees;
+
+7. Write a query to get the total salaries payable to employees.
+     select sum(salary )from employees;
+
+8. Write a query to get the minimum salary from employees table.
+      select min(salary )from employees;
+
+9. Write a query to get the maximum salary of an employee working as a Programmer(IT_PROG).
+       select max(salary)from employees where job_id like 'it_prog';
+
+10. Write a query to get the average salary and number of employees working in the department which ID is 90.
+       select avg(salary),count(emp_id)from employees where emp_id = 90;
+
+SUB QUERIES
+-----------
+11. Write a query to find the first_name, last_name and salaries of the employees who have a higher salary than the employee whose last_name is Bull.
+       select first_name,last_name,salary from employees where salary>(select salary from employees where last_name='bull');
+
+12. Write a SQL subquery to find the first_name and last_name of all employees who works in the IT department.
+      select first_name,last_name from employees where department IN (select department from employees where department='it');
+
+13. Write a SQL subquery to find the first_name and last_name of the employees under a manager who works for a department based in the United States.
+       select first_name,last_name from employees where manager_id in(select emp_id from employees where department_id in(select department_id from employees where location_id in(select location_id from locations where country_id='US')));
+
+14. Write a SQL subquery to find the first_name and last_name of the employees who are working as a manager.
+       select first_name,last_name from employees where emp_id in(select manager_id from employees);
+
+15. Write a SQL subquery to find the first_name, last_name and salary, which is greater than the average salary of the employees.
+       select first_name,last_name,salary from employees where salary>(select avg(salary) from employees);
+
+JOIN
+----
+16. Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of all the departments.
+       SELECT location_id, street_address, city, state_province, country_name FROM locations NATURAL JOIN countries;
+
+17. Write a query to make a join with employees and departments table to find the name of the employee, including first_name and last name, department ID and name of departments.
+      select first_name, last_name, department_id, department_name FROM employees JOIN departments using (department_id); 
