@@ -1,0 +1,62 @@
+1. Write a SQL statement to create a simple table countries including columns country_id,country_name and region_id.
+      create table countries(country_id varchar(2), country_name varchar(20), region_id decimal(10,0));
+
+2. Write a SQL statement to create a simple table countries including columns country_id,country_name and region_id which already exist.
+      DROP TABLE IF EXISTS countries;
+      create table countries(country_id varchar(2), country_name varchar(20), region_id decimal(10,0));
+
+3. Write a SQL statement to create the structure of a table dup_countries similar to countries.
+      create table dup_countries(country_id varchar(2), country_name varchar(20), region_id decimal(10,0));
+
+4. Write a SQL statement to create a duplicate copy of countries table including structure and data by name dup_countries.
+      create table dup_countries(country_id varchar(2), country_name varchar(20), region_id decimal(10,0));
+
+5. Write a SQL statement to create a table countries set a constraint NULL.
+      INSERT INTO countries (country_id,country_name,region_id)  values ('11', 'USA',NULL);
+
+INSERT
+------
+1. Write a SQL statement to insert a record with your own value into the table countries against each column.
+      INSERT INTO countries VALUES('12','India',100);
+
+2. Write a SQL statement to insert one row into the table countries against the column country_id and country_name.
+      INSERT INTO countries VALUES('7','UK');
+
+3. Write a SQL statement to create duplicates of countries table named country_new with all structure and data.
+      CREATE TABLE IF NOT EXISTS country_new AS SELECT * FROM countries;
+
+4. Write a SQL statement to insert NULL values into region_id column for a row of countries table.
+      INSERT INTO countries (country_id,country_name,region_id)  values ('2', 'Europe',NULL);
+
+5. Write a SQL statement to insert 3 rows by a single insert statement.
+      INSERT INTO countries VALUES('22','Bangladesh',101),('1','Isreal',56),('22','Pakistan',34);
+
+SELECT
+------
+1. Write a query to display the names (first_name, last_name) using an alias name “First Name", "Last Name".
+      SELECT first_name as FIRST_NAME,last_name as LAST_NAME FROM employees;
+
+2. Write a query to get a unique department ID from employee table.
+      SELECT DISTINCT department_id from employees;
+
+3. Write a query to get the names (first_name, last_name), salary and 15% of salary as PF for all the employees.
+      SELECT first_name,last_name,salary,(0.15*salary) as PF from employees;
+
+4. Write a query to get the employee ID, names (first_name, last_name) and salary in ascending order according to their salary.
+      SELECT employee_id,first_name,last_name,salary from employees ORDER BY salary IN ASC;
+
+5. Write a query to get the number of employees working with the company.
+      SELECT COUNT(employee_id) from employees;
+
+1. Write a query to display the name, including first_name and last_name and salary for all employees whose salary is out of the range between $10,000 and $15,000.
+      SELECT first_name,last_name,salary from employees WHERE salary BETWEEN(10000 , 15000);
+
+2. Write a query to display the name, including first_name and last_name, and department ID who works in the department 30 or 100 and arrange the result in ascending order according to the department ID.
+      SELECT first_name, last_name, department_id FROM employees WHERE department_id IN (30, 100) ORDER BY department_id  ASC;
+
+3. Write a query to display the name, including first_name and last_name, and salary who works in the department either 30 or 100 and salary is out of the range between $10,000 and $15,000.
+      SELECT first_name, last_name,salary, department_id FROM employees WHERE salary NOT BETWEEN 10000 and 15000 and department_id IN (30,100);
+
+4. Write a query to display the name, including first_name and last_name and hire date for all employees who were hired in 1987.
+      SELECT first_name, last_name, hire_date FROM employees WHERE YEAR(hire_date) LIKE '1987%';
+    
